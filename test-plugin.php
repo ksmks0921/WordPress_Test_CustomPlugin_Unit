@@ -105,16 +105,35 @@ function diwp_create_shortcode_unit_post_type(){
           </tr>
         </thead>
         <tbody id="tablecontents">';
+        $list_one = [];
         while($query->have_posts()) :  
-            $unit_item = $query->the_post();   
-            $result .= '<tr class="row1">';    	                               
-            $result .= '<td>'. get_post_meta(get_the_id(), 'asset_id')[0] . '</td>';
-            $result .= '<td>'. get_post_meta(get_the_id(), 'building_id')[0] . '</td>';
-            $result .= '<td>'. get_post_meta(get_the_id(), 'floor_id')[0] . '</td>';
-            $result .= '<td>'. get_post_meta(get_the_id(), 'floor_plan_id')[0] . '</td>';
-            $result .= '<td>'. get_post_meta(get_the_id(), 'area')[0] . '</td>';           
-            $result .= '</tr>';  
+
+            $query->the_post();               
+            if(get_post_meta(get_the_id(), 'area')[0] != 1) {
+                $result .= '<tr class="row1">';    	                               
+                $result .= '<td>'. get_post_meta(get_the_id(), 'asset_id')[0] . '</td>';
+                $result .= '<td>'. get_post_meta(get_the_id(), 'building_id')[0] . '</td>';
+                $result .= '<td>'. get_post_meta(get_the_id(), 'floor_id')[0] . '</td>';
+                $result .= '<td>'. get_post_meta(get_the_id(), 'floor_plan_id')[0] . '</td>';
+                $result .= '<td>'. get_post_meta(get_the_id(), 'area')[0] . '</td>';           
+                $result .= '</tr>';  
+            }
+            else {
+                $unit_item = "";
+                $unit_item .= '<tr class="row1">';    	                               
+                $unit_item .= '<td>'. get_post_meta(get_the_id(), 'asset_id')[0] . '</td>';
+                $unit_item .= '<td>'. get_post_meta(get_the_id(), 'building_id')[0] . '</td>';
+                $unit_item .= '<td>'. get_post_meta(get_the_id(), 'floor_id')[0] . '</td>';
+                $unit_item .= '<td>'. get_post_meta(get_the_id(), 'floor_plan_id')[0] . '</td>';
+                $unit_item .= '<td>'. get_post_meta(get_the_id(), 'area')[0] . '</td>';           
+                $unit_item .= '</tr>';  
+                array_push($list_one, $unit_item);
+            }           
+
         endwhile;
+        foreach ($list_one as $list) {
+            $result .= $list;                                            
+        }
         $result .='</tbody>                  
         </table>';
         wp_reset_postdata();  
