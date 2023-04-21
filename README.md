@@ -23,7 +23,9 @@ I have created a custom plugin. The requirments are as below.
     - floor_id
     - floor_plan_id
     - area
+
     Add a 'rule group': "post type is equal to 'unit'".
     (Custom post type 'unit' would be created when install this plugin. You can see it in admin page wiht the name of 'units')
+    
 5. To trigger an API call to create 'unit' records, click "Get Custom Posts" button from 'My Custom Plugin'
 6. To show all units, you can use shortcode: [unit-list] in any page or post.
