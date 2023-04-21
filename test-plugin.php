@@ -45,7 +45,7 @@ function my_custom_plugin_enqueue_scripts() {
 add_action('wp_ajax_my_custom_plugin_get_custom_posts', 'my_custom_plugin_get_custom_posts');
 function my_custom_plugin_get_custom_posts() {
 
-    $response = wp_remote_get('https://api.sightmap.com/v1/assets/1273/multifamily/units?per-page=30', array( 'headers' => array( 'API-Key' => "7d64ca3869544c469c3e7a586921ba37")));
+    $response = wp_remote_get('https://api.sightmap.com/v1/assets/1273/multifamily/units?per-page=250', array( 'headers' => array( 'API-Key' => "7d64ca3869544c469c3e7a586921ba37")));
     $data = json_decode(wp_remote_retrieve_body($response));    
 
     foreach ($data->data as $post) {
