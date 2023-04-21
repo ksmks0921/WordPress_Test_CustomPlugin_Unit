@@ -1,9 +1,18 @@
 <?php
 /*
-Plugin Name: Test Plugin
-Description: A custom plugin that makes an API call and creates unit records.
+Plugin Name: My Custom Plugin
+Description: A custom plugin that make an API call and create unit records.
 */
 
+register_activation_hook( __FILE__, 'child_plugin_activate' );
+function child_plugin_activate(){
+
+    // Require parent plugin
+    if ( ! is_plugin_active( 'advanced-custom-fields/acf.php' ) and current_user_can( 'activate_plugins' ) ) {
+        // Stop activation redirect and show error
+        wp_die('Sorry, but this plugin requires the "Advanced Custom Fields (ACF)" Plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+    }
+}
 //// Create Unit CPT
 function register_unit_cpt() {
     register_post_type( 'unit', [
